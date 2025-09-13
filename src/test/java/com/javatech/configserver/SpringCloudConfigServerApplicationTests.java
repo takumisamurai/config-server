@@ -1,4 +1,4 @@
-package com.javatech.spring_cloud_config_server;
+package com.javatech.configserver;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
