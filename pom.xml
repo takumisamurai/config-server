@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
+
+    <modelVersion>4.0.0</modelVersion>
+
+    <!--
+        The parent element specifies the parent project for this POM.
+        It enables inheritance of configuration, dependencies, properties,
+        plugin management, and other settings from the specified parent POM.
+        Here, the spring-boot-starter-parent provides common Spring Boot build
+        configurations, default plugin versions, and dependency versions.
+        This reduces duplication and simplifies project setup.
+    -->
+    <parent>
+        <groupId>org.springframework.boot</groupId>
+        <artifactId>spring-boot-starter-parent</artifactId>
+        <version>3.5.5</version>
+        <relativePath/> <!-- lookup parent from repository -->
+    </parent>
+
+    <groupId>com.javatech</groupId>
+    <artifactId>config-server</artifactId>
+    <version>0.0.1-SNAPSHOT</version>
+    <name>config-server</name>
+    <description>Demo project for Spring Cloud Config Server</description>
+
+    <properties>
+        <java.version>17</java.version>
+        <spring-cloud.version>2025.0.0</spring-cloud.version>
+    </properties>
+
+    <dependencies>
+        <dependency>
+            <groupId>org.springframework.cloud</groupId>
+            <artifactId>spring-cloud-config-server</artifactId>
+            <!-- Version not specified here,
+                 because it will be managed centrally below through dependencyManagement -->
+        </dependency>
+
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-test</artifactId>
+            <scope>test</scope>
+        </dependency>
+    </dependencies>
+
+    <!--
+        A BOM (Bill of Materials) in Maven is a special type of POM file that acts as a
+        centralized version manager for a set of dependencies used together.
+        It helps control and coordinate dependency versions across multiple projects or modules,
+        ensuring compatibility and reducing version conflicts.
+
+        Centralized Version Management:
+        Simplifies Upgrades,
+        Avoids Version Conflicts,
+        Improves Build Consistency
+
+        <dependencyManagement> section imports BOM
+
+        The dependencyManagement section is used to import a BOM (Bill of Materials) that defines
+        versions and dependency management for a set of artifacts collectively.
+        It does not bring dependencies automatically but centrally manages versions for dependencies
+        declared elsewhere in this or child modules' <dependencies> sections.
+        The 'import' scope and type 'pom' means the specified POM is treated as a BOM.
+        Here, spring-cloud-dependencies BOM manages Spring Cloud module versions
+        consistently without repeating versions throughout the POMs.
+    -->
+    <dependencyManagement>
+        <dependencies>
+            <dependency>
+                <groupId>org.springframework.cloud</groupId>
+                <artifactId>spring-cloud-dependencies</artifactId>
+                <version>${spring-cloud.version}</version>
+                <type>pom</type>
+                <scope>import</scope>
+            </dependency>
+        </dependencies>
+    </dependencyManagement>
+
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-maven-plugin</artifactId>
+            </plugin>
+        </plugins>
+    </build>
+
+</project>
